@@ -1,0 +1,119 @@
+/* Small overrides for interactions Webflow normally drives with JS/IX2 */
+
+/* Nav must sit above content so full-bleed case-study heroes can tuck under
+   its translucent blur (the blur then picks up the image colours). */
+.nav_component { z-index: 100; }
+
+/* Gradient underline used across nav & footer links (from the site's embed) */
+.nav_border-line {
+  background: linear-gradient(92deg, #E5C3FF -12.13%, #A7AAFF 103.48%);
+  box-shadow: 0 2px 25px 6px #BCC7EF;
+}
+
+/* Nav link hover underline reveal */
+.nav_link-wrapper { position: relative; }
+.nav_link-wrapper .nav_border-line {
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .3s ease;
+}
+.nav_link-wrapper:hover .nav_border-line,
+.nav_link-wrapper .nav_border-line.block { transform: scaleX(1); }
+
+/* Background video should cover its container */
+.w-background-video { position: relative; overflow: hidden; }
+.w-background-video > video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: auto;
+}
+
+/* ---- Nav: Work / Explorations / About me links (item 4) ---- */
+.is-nav-flex { display: flex; align-items: center; justify-content: space-between; }
+.nav_left-wrapper { display: flex; align-items: center; gap: 24px; }
+.nav_left-links.is-desktop-pill { display: flex; }
+.nav_mobile-links { display: none; }
+
+/* Mobile nav menu toggle */
+@media screen and (max-width: 991px) {
+  .nav_left-links.is-desktop-pill { display: none; }
+  .nav_mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .nav_right-wrapper {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 20px 30px;
+    background: rgba(0, 0, 0, .9);
+    backdrop-filter: blur(20px);
+  }
+  .nav_right-wrapper.is-open { display: block; }
+}
+
+/* ---- Awards: remove dead space below each card, uniform spacing (item 2) ---- */
+.award_content-wrapper {
+  height: 100%;
+  padding: 28px 24px 26px 26px;
+  justify-content: space-between;
+}
+.award_card-bottom-wrapper {
+  height: auto;
+  max-width: 100%;
+  align-items: flex-start;
+  margin-top: 18px;
+}
+.text-size-medium.width-12px {
+  height: auto;
+  max-width: 100%;
+}
+
+/* ---- Testimonials: clean, aligned layout that fits inside the card (item 3) ---- */
+.testimonial_slide-wrapper {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  height: 100%;
+  min-height: 420px;
+  padding: 32px;
+}
+.testimonial_right-wrapper {   /* the quote — place at top */
+  order: 1;
+  width: 100%;
+  max-width: 100%;
+}
+.text-xmedium {
+  width: 100%;
+  height: auto;
+}
+.testimonail_left-wrapper {    /* photo + name + role — place at bottom */
+  order: 2;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+.client_image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  flex: none;
+}
+.client_bottom-wrapper { max-width: 100%; }
+.client_name { font-size: 18px; line-height: 22px; }
+.client_description { font-size: 15px; line-height: 20px; letter-spacing: -.5px; }

@@ -1,0 +1,312 @@
+/* =========================================================
+   Noise case study — real component system
+   (replaces the stacked Figma-export PNGs with live HTML/CSS)
+   ========================================================= */
+
+.cs {
+  --bg: #0c0c0c;
+  --panel: linear-gradient(190deg, #252525, #101010);
+  --panel-border: #3d3d3d;
+  --muted: #ffffffbf;
+  --faint: #fafafa8c;
+  --accent: #deb4ff;
+  --green: #b6e14e;
+  background: var(--bg);
+  color: #fff;
+  font-family: Inter, sans-serif;
+}
+
+/* Everything in a case study is LEFT aligned — no centered text anywhere */
+.cs, .cs h1, .cs h2, .cs h3, .cs h4, .cs h5, .cs p, .cs li, .cs aside,
+.cs .cs-container, .cs .cs-meta-block, .cs .cs-meta-block h4, .cs .cs-meta-block p {
+  text-align: left;
+}
+
+.cs-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.cs-section { padding: 70px 0; }
+.cs-section.is-tight { padding: 40px 0; }
+
+/* ---- section label: dot + uppercase tracked text ---- */
+.cs-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #8a8a8a;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.cs-label::before {
+  content: "";
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #d8d8d8;
+  box-shadow: 0 0 14px #ffffff80;
+  flex: none;
+}
+
+.cs-h2 {
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  margin: 0 0 22px;
+}
+.cs-h2 .accent { color: var(--accent); }
+
+.cs-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 34px; }
+.cs-tag {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #cfcfcf;
+  background: #ffffff0f;
+  border: 1px solid #ffffff1a;
+  border-radius: 999px;
+  padding: 7px 16px;
+}
+
+.cs-lead {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+  max-width: 760px;
+  margin: 0 0 34px;
+}
+
+.cs-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 18px;
+  padding: 28px;
+}
+
+/* ===================== HERO ===================== */
+/* Full-bleed collage that tucks up under the translucent nav */
+.cs-hero { background: var(--bg); padding-top: 0; margin-top: calc(-1 * var(--nav-h, 88px)); }
+.cs-hero-collage {
+  width: 100%;
+  display: block;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+}
+.cs-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 56px;
+  margin-top: 60px;
+}
+.cs-hero-title {
+  font-size: clamp(34px, 5vw, 62px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  text-transform: uppercase;
+  margin: 0 0 28px;
+}
+.cs-hero-intro p { color: var(--muted); font-size: 17px; line-height: 1.8; margin: 0 0 18px; max-width: 640px; }
+.cs-meta-block { margin-bottom: 26px; }
+.cs-meta-block h4 { font-size: 16px; font-weight: 600; margin: 0 0 6px; }
+.cs-meta-block p { color: #9a9a9a; font-size: 15px; line-height: 1.5; margin: 0; }
+.cs-meta-block .watch-ico { width: 26px; height: 26px; stroke: #cfcfcf; }
+
+/* ===================== PROBLEM ===================== */
+.cs-problem { text-align: left; }
+.cs-pill {
+  display: inline-block;
+  background: #ffffff12;
+  border: 1px solid #ffffff1f;
+  border-radius: 999px;
+  padding: 10px 24px;
+  font-size: 15px;
+  color: #eaeaea;
+  margin-bottom: 30px;
+}
+.cs-problem-q {
+  font-size: clamp(24px, 3.2vw, 38px);
+  font-weight: 400;
+  line-height: 1.35;
+  max-width: 1000px;
+  margin: 0 0 40px;
+}
+.cs-wide-img {
+  width: 100%;
+  border-radius: 20px;
+  display: block;
+  box-shadow: 0 40px 80px #00000080;
+}
+/* full-slab images that already sit on the dark bg (IA flow, learnings) */
+.cs-wide-img.flush { border-radius: 0; box-shadow: none; }
+
+/* edge-to-edge image that fills the full width (placed outside the padded container) */
+.cs-fill-img { width: 100%; display: block; margin-top: 32px; }
+
+/* ===================== VIDEO EMBEDS ===================== */
+.cs-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 40px 80px #00000080;
+}
+.cs-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.cs-video-single { margin-top: 8px; }
+.cs-video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media screen and (max-width: 900px) {
+  .cs-video-grid { grid-template-columns: 1fr; }
+}
+
+/* ===================== CARD GRIDS ===================== */
+.cs-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cs-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+.cs-card h3 { font-size: 20px; font-weight: 600; margin: 0 0 12px; }
+.cs-card p { color: var(--muted); font-size: 15px; line-height: 1.6; margin: 0; }
+
+/* bulleted list with green tick bars */
+.cs-list { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.cs-list li {
+  position: relative;
+  padding-left: 16px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.cs-list li::before {
+  content: "";
+  position: absolute; left: 0; top: 3px;
+  width: 3px; height: calc(100% - 6px);
+  border-radius: 3px;
+  background: var(--green);
+}
+.cs-list li b { color: #fff; font-weight: 600; }
+
+.cs-card-ico {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: #ffffff10;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+/* audience card header (icon + title) */
+.cs-aud-head { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+.cs-aud-head .cs-card-ico { margin-bottom: 0; }
+.cs-aud-head h3 { margin: 0; }
+
+/* ===================== PERSONAS ===================== */
+.cs-persona-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.cs-persona {
+  border-radius: 18px;
+  padding: 24px;
+  border: 1px solid #ffffff14;
+  position: relative;
+  overflow: hidden;
+}
+.cs-persona.c1 { background: linear-gradient(160deg, #3b2170, #1c1330); }
+.cs-persona.c2 { background: linear-gradient(160deg, #14304a, #0e1c2c); }
+.cs-persona.c3 { background: linear-gradient(160deg, #6a4a1c, #2e2110); }
+.cs-persona.c4 { background: linear-gradient(160deg, #5a1f52, #2a1228); }
+.cs-persona-top { display: flex; gap: 18px; }
+.cs-persona-photo {
+  width: 92px; height: 92px; flex: none;
+  border-radius: 14px;
+  object-fit: cover;
+}
+.cs-persona-apps { flex: 1; }
+.cs-persona-apps .cap { font-size: 15px; font-weight: 600; margin: 0 0 10px; }
+.cs-app-row { font-size: 12px; color: #ffffffcc; margin-bottom: 8px; }
+.cs-app-bar { height: 5px; border-radius: 3px; background: #ffffff26; margin-top: 4px; overflow: hidden; }
+.cs-app-bar > i { display: block; height: 100%; border-radius: 3px; background: #ffffffb0; }
+.cs-persona h3 { font-size: 26px; font-weight: 600; letter-spacing: -1px; margin: 20px 0 4px; }
+.cs-persona h4 { font-size: 16px; font-weight: 600; margin: 0 0 10px; color: #fff; }
+.cs-persona ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.cs-persona li { position: relative; padding-left: 16px; color: #ffffffcc; font-size: 14px; line-height: 1.5; }
+.cs-persona li::before { content: "•"; position: absolute; left: 2px; color: #ffffff99; }
+
+/* ===================== VISUAL RESEARCH SELECTORS ===================== */
+.cs-vr-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; margin-bottom: 26px; }
+.cs-vr-row .desc { color: var(--muted); font-size: 15px; line-height: 1.6; }
+.cs-optbox { background: #161616; border: 1px solid #262626; border-radius: 16px; padding: 20px; display: flex; gap: 16px; flex-wrap: wrap; }
+.cs-opt {
+  width: 84px; height: 84px; border-radius: 14px;
+  border: 1px solid #333; display: grid; place-items: center;
+  color: #7d7d7d; font-size: 13px; background: #0e0e0e;
+}
+.cs-opt.dial { border-radius: 50%; }
+.cs-opt.sel { border-color: var(--green); box-shadow: 0 0 0 2px #b6e14e55 inset; color: #cfe89a; }
+.cs-type-opt { display: flex; flex-direction: column; gap: 6px; }
+.cs-type-chip { font-weight: 800; font-size: 12px; letter-spacing: .3px; }
+
+/* ===================== IDEATION BOARD ===================== */
+.cs-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.cs-board-col h4 {
+  text-align: left; font-size: 13px; letter-spacing: .5px;
+  background: #ffffff10; border: 1px solid #ffffff1a; border-radius: 10px;
+  padding: 10px 14px; margin: 0 0 12px;
+}
+.cs-feat {
+  background: linear-gradient(180deg, #1c1c1c, #131313);
+  border: 1px solid #2b2b2b; border-radius: 12px;
+  padding: 12px 14px; margin-bottom: 10px;
+}
+.cs-feat.hi { border-color: #6f8f2e; box-shadow: 0 0 0 1px #b6e14e30 inset; }
+.cs-feat b { display: block; font-size: 13.5px; margin-bottom: 4px; }
+.cs-feat p { color: #a5a5a5; font-size: 12px; line-height: 1.45; margin: 0; }
+.cs-feat.slim { padding: 11px 14px; }
+.cs-feat.slim b { margin: 0; }
+
+/* ===================== IA FLOW ===================== */
+.cs-flow { background: #101010; border: 1px solid #232323; border-radius: 18px; padding: 30px; overflow-x: auto; }
+.cs-flow-note { color: var(--green); font-size: 13px; margin: 0 0 16px; }
+.cs-flow-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px; }
+.cs-node {
+  border: 1px solid #3a3a3a; border-radius: 8px;
+  padding: 10px 12px; font-size: 13px; text-align: left;
+  margin-bottom: 10px; background: #151515;
+}
+.cs-node.solid { border-color: #eaeaea; }
+.cs-node.dim { color: #777; }
+.cs-flow-coltitle { font-size: 12px; color: #8a8a8a; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 12px; }
+
+/* ===================== LEARNINGS ===================== */
+.cs-learn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.cs-learn { border-radius: 20px; padding: 34px; }
+.cs-learn.dark { background: #1a1a1a; border: 1px solid #2a2a2a; }
+.cs-learn.purple { background: linear-gradient(150deg, #7c3aed, #5b21b6); }
+.cs-learn h3 { font-size: 26px; font-weight: 600; margin: 0 0 24px; }
+.cs-chip-cloud { display: flex; flex-wrap: wrap; gap: 12px; }
+.cs-chip {
+  background: #ffffff14; border: 1px solid #ffffff1f;
+  border-radius: 999px; padding: 10px 18px; font-size: 15px;
+}
+.cs-learn.purple .cs-chip { background: #ffffff22; border-color: #ffffff33; }
+.cs-chip small { color: #ffffff99; font-size: 11px; }
+
+@media screen and (max-width: 900px) {
+  .cs-hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .cs-grid-3, .cs-grid-2, .cs-persona-grid, .cs-learn-grid, .cs-vr-row { grid-template-columns: 1fr; }
+  .cs-board { grid-template-columns: 1fr 1fr; }
+}
+@media screen and (max-width: 560px) {
+  .cs-board { grid-template-columns: 1fr; }
+}

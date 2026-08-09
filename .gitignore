@@ -1,0 +1,7 @@
+# local preview server (not needed for hosting)
+serve.py
+
+# OS / editor cruft
+.DS_Store
+*.log
+Thumbs.db
