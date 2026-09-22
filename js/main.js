@@ -1,19 +1,7 @@
-// Testimonials carousel — mirrors the Webflow Swiper config
+// Testimonials are a native CSS scroll-snap carousel (see .swiper.brand in
+// custom.css) — no Swiper init, so horizontal trackpad/touch/scrollbar scrolling
+// works reliably and every card keeps the same static layout.
 document.addEventListener('DOMContentLoaded', function () {
-  if (window.Swiper) {
-    new Swiper('.swiper.brand', {
-      loop: true,
-      slidesPerView: 1.5,
-      spaceBetween: 20,
-      allowTouchMove: true,
-      centeredSlides: true,
-      breakpoints: {
-        480:  { slidesPerView: 1.5, spaceBetween: 20 },
-        999:  { slidesPerView: 1.5, spaceBetween: 20 },
-        1024: { slidesPerView: 2.5, spaceBetween: 64 },
-      },
-    });
-  }
 
   // Mobile nav toggle
   var toggle = document.querySelector('[data-nav-toggle]');

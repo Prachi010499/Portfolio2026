@@ -1,8 +1,20 @@
 /* Small overrides for interactions Webflow normally drives with JS/IX2 */
 
-/* Nav must sit above content so full-bleed case-study heroes can tuck under
-   its translucent blur (the blur then picks up the image colours). */
-.nav_component { z-index: 100; }
+/* Nav must sit above content so full-bleed heroes / the Explore canvas tuck
+   under it. Full-width frosted-glass bar to the Figma spec — white 10% + 20px
+   blur — one clean layer that separates the nav from whatever scrolls below,
+   so the links stay readable instead of overlapping the content (item 1). */
+.nav_component {
+  z-index: 2147483647;   /* above EVERYTHING — incl. hovered canvas tiles (z 99999) */
+  background-color: rgba(255, 255, 255, .05);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+/* Keep the nav pill links on a single line — "About me" was wrapping to two (item 1) */
+.nav_link-text { white-space: nowrap; }
+.nav_left-wrapper { max-width: none; }
+.nav_left-links.is-desktop-pill { grid-column-gap: 36px; }
 
 /* Gradient underline used across nav & footer links (from the site's embed) */
 .nav_border-line {
@@ -81,39 +93,187 @@
   max-width: 100%;
 }
 
-/* ---- Testimonials: clean, aligned layout that fits inside the card (item 3) ---- */
-.testimonial_slide-wrapper {
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 24px;
-  height: 100%;
-  min-height: 420px;
-  padding: 32px;
+/* ---- Testimonials: native horizontal scroll-snap carousel (item 3 + scroll) ----
+   No Swiper JS — .swiper.brand is the scroll viewport, .swiper-wrapper the flex
+   track, each .swiper-slide a fixed-width card. This guarantees horizontal
+   scrolling works (trackpad / touch / scrollbar) and every card is identical. */
+.swiper.brand {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  /* left inset tracks the .container-medium edge so the first card lines up with
+     the section heading at any width; 100px minimum (matches .padding-global) */
+  padding: 8px 100px 22px;
+  padding-left: max(100px, calc((100vw - 1266px) / 2));
+  scroll-padding-left: max(100px, calc((100vw - 1266px) / 2));
 }
-.testimonial_right-wrapper {   /* the quote — place at top */
+.swiper.brand .swiper-wrapper {
+  display: flex;
+  gap: 28px;
+  transform: none !important;    /* neutralise any leftover Swiper transform */
+  height: auto;
+}
+.swiper.brand .swiper-slide {
+  flex: 0 0 auto;
+  width: min(460px, 82vw);
+  height: auto;
+  scroll-snap-align: start;
+}
+/* slim scrollbar for the carousel */
+.swiper.brand::-webkit-scrollbar { height: 8px; }
+.swiper.brand::-webkit-scrollbar-thumb { background: #ffffff26; border-radius: 8px; }
+.swiper.brand::-webkit-scrollbar-track { background: transparent; }
+
+/* Card interior: quote on top, footer row = name/role LEFT + photo RIGHT */
+.swiper.brand .testimonial_slide-wrapper {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0;
+  height: 340px;
+  padding: 34px 34px 28px;
+  overflow: hidden;   /* safety net: clip a clamped quote, never spill onto footer */
+}
+.swiper.brand .testimonial_right-wrapper {     /* the quote — top, grows to fill */
   order: 1;
   width: 100%;
   max-width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
 }
-.text-xmedium {
+.swiper.brand .text-xmedium {
   width: 100%;
   height: auto;
+  max-width: 100%;
+  margin: 0;                     /* kill Webflow's global `p { margin:60px 100px }` */
+  text-align: left;
+  font-size: 16px;
+  line-height: 26px;
+  /* clamp long quotes so every card stays the same height */
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.testimonail_left-wrapper {    /* photo + name + role — place at bottom */
+.swiper.brand .testimonail_left-wrapper {      /* footer row */
   order: 2;
+  flex: none;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;   /* text left, photo pushed right */
   gap: 14px;
   width: 100%;
+  margin-top: 18px;
+  padding-top: 20px;
+  border-top: 1px solid #ffffff1f;   /* subtle divider, like the reference */
 }
-.client_image {
-  width: 60px;
-  height: 60px;
+.swiper.brand .client_bottom-wrapper {          /* name + role — left */
+  order: 1;
+  width: auto;
+  max-width: none;
+}
+.swiper.brand .client_image {                   /* photo — right */
+  order: 2;
+  width: 56px;
+  height: 56px;
   object-fit: cover;
   border-radius: 50%;
   flex: none;
 }
-.client_bottom-wrapper { max-width: 100%; }
-.client_name { font-size: 18px; line-height: 22px; }
-.client_description { font-size: 15px; line-height: 20px; letter-spacing: -.5px; }
+.swiper.brand .client_name { font-size: 17px; line-height: 22px; font-weight: 600; letter-spacing: -.3px; }
+.swiper.brand .client_description { font-size: 14px; line-height: 19px; letter-spacing: -.2px; }
+
+/* ---- Even vertical rhythm between homepage sections (item 2) ----
+   Webflow stacked a 100px section-bottom + 128px section-top before Awards
+   (=228px) but left almost nothing between Awards and Collaborations.
+   Normalise every section transition to a single ~110px gap. */
+.section_header      { padding-bottom: 110px; }
+.section_collabration { padding-top: 0; }          /* gap now comes from header's 110px */
+.section_services    { padding-top: 110px; }
+.section_testimonail { padding-top: 110px; }
+.section_exploration { padding-top: 110px; }
+/* Awards block and Collaborations block are sibling .padding-global children —
+   give the second one the same 110px gap the other sections get. */
+.section_collabration > .padding-global + .padding-global { margin-top: 110px; }
+
+/* ---- Explorations: real horizontal scroll on desktop too (item 4) ----
+   Webflow already scrolls this row on small screens; on desktop it was a rigid
+   3x509px grid (~2078px) that overflowed and clipped the 3rd card. Make it a
+   horizontal flex track that scrolls and snaps. */
+.exploration_grid {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  grid-column-gap: 30px;
+  gap: 30px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-left: 2px;
+  padding-bottom: 14px;   /* breathing room for the scrollbar */
+}
+.exploration_grid > .services_card {
+  flex: 0 0 auto;
+  width: 400px;
+  max-width: 400px;
+  scroll-snap-align: start;
+}
+/* slim, unobtrusive scrollbar */
+.exploration_grid::-webkit-scrollbar { height: 8px; }
+.exploration_grid::-webkit-scrollbar-thumb { background: #ffffff26; border-radius: 8px; }
+.exploration_grid::-webkit-scrollbar-track { background: transparent; }
+
+/* =========================================================
+   MOBILE RESPONSIVENESS
+   Webflow ships fixed pixel widths (e.g. width:500px / 1000px) that
+   overflow phones. Constrain them and scale type down on small screens.
+   overflow-x guard sits on main/footer (NOT body) so the sticky nav keeps working,
+   and ONLY at mobile/tablet widths — on desktop `overflow-x:hidden` would force
+   `overflow-y:auto`, clipping the hero gradient glow where it bleeds up under the
+   frosted nav. The fixed-width overflow it guards only happens ≤991px anyway. */
+
+@media screen and (max-width: 991px) {
+  .main-wrapper, .footer_component { overflow-x: hidden; }
+  .heading-style-h1 { width: 100%; max-width: 100%; font-size: 44px; line-height: 52px; }
+  .heading-style-h1 .text-weight-medium,
+  .heading-style-h1 .hero_highlight { font-size: 44px; line-height: 52px; }
+  .text-size-large { width: 100%; max-width: 100%; font-size: 17px; line-height: 27px; }
+  .hero_content { width: 100%; max-width: 100%; margin-right: 0; margin-left: 0; }
+  .hero_blur-image { max-width: 100%; height: auto; }
+  .max-width-1042px { width: 100%; max-width: 100%; }
+}
+
+@media screen and (max-width: 767px) {
+  .padding-global { padding-left: 20px; padding-right: 20px; }
+
+  /* hero + section headings */
+  .heading-style-h1 { font-size: 30px; line-height: 38px; letter-spacing: -.5px; }
+  .heading-style-h1 .text-weight-medium,
+  .heading-style-h1 .hero_highlight { font-size: 30px; line-height: 38px; }
+  .heading-style-h1.in-mb-28px { margin-bottom: 20px; }
+
+  /* body / card copy */
+  .text-size-large,
+  .text-size-large.letter-spacing,
+  .text-size-large.in-mb-16px,
+  .text-size-large._14px { width: 100%; max-width: 100%; font-size: 15px; line-height: 24px; }
+
+  /* card titles */
+  .heading-style-h2 { font-size: 21px; line-height: 27px; }
+  .heading-style-h2._21px { font-size: 19px; line-height: 25px; }
+
+  /* footer heading */
+  .footer-title { font-size: 26px; line-height: 32px; }
+  .footet_logo-text, .nav_logo-text { font-size: 16px; }
+
+  /* keep media blocks from overflowing */
+  .service_bg-image, .service_bg-image-2, .services_card-image, .gif-video { max-width: 100%; }
+}
+
+@media screen and (max-width: 479px) {
+  .heading-style-h1 { font-size: 27px; line-height: 34px; }
+  .heading-style-h1 .text-weight-medium,
+  .heading-style-h1 .hero_highlight { font-size: 27px; line-height: 34px; }
+}
