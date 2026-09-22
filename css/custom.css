@@ -277,3 +277,69 @@
   .heading-style-h1 .text-weight-medium,
   .heading-style-h1 .hero_highlight { font-size: 27px; line-height: 34px; }
 }
+
+/* =========================================================
+   ABOUT — "For hiring managers" design-journey timeline
+   Replaces the flat _ll.png with a real, aligned, responsive
+   timeline sitting in the site's padding-global/container grid.
+   Brand gradient (#E5C3FF -> #A7AAFF) ties it to nav + hero.
+   ========================================================= */
+.section_journey { margin-top: 96px; margin-bottom: 40px; text-align: left; }  /* about page centers content; timeline reads left */
+.journey_head { margin-bottom: 44px; text-align: left; }   /* about page centers content; keep the journey left-aligned */
+.journey_badge {
+  display: inline-block;
+  font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+  color: #0b0b0e; background: linear-gradient(92deg, #E5C3FF, #A7AAFF);
+  padding: 6px 13px; border-radius: 999px; transform: rotate(-3deg);
+  box-shadow: 0 8px 26px -8px #A7AAFF; margin-bottom: 18px;
+}
+.journey_title { margin: 0; }
+
+.journey_timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+/* the vertical rail */
+.journey_timeline::before {
+  content: ""; position: absolute; top: 8px; bottom: 8px; left: 7px; width: 2px;
+  background: linear-gradient(180deg, #E5C3FF, #A7AAFF 45%, rgba(167,170,255,.12));
+  border-radius: 2px;
+}
+.journey_item { position: relative; padding: 0 0 34px 44px; }
+.journey_item:last-child { padding-bottom: 0; }
+.journey_dot {
+  position: absolute; left: 0; top: 8px; width: 16px; height: 16px; border-radius: 50%;
+  background: linear-gradient(92deg, #E5C3FF, #A7AAFF);
+  box-shadow: 0 0 0 4px rgba(167,170,255,.12), 0 0 18px 2px rgba(167,170,255,.45);
+}
+.journey_card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px; padding: 22px 24px;
+  transition: border-color .25s ease, background .25s ease, transform .25s ease;
+}
+.journey_card:hover {
+  border-color: rgba(167,170,255,.35);
+  background: rgba(255,255,255,.05);
+  transform: translateY(-2px);
+}
+.journey_meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 10px; }
+.journey_role { margin: 0; font-size: 20px; line-height: 27px; font-weight: 600; color: #f2f0ea; }
+.journey_org {
+  font-size: 20px; line-height: 27px; font-weight: 600;
+  background: linear-gradient(92deg, #E5C3FF, #A7AAFF);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.journey_date {
+  margin-left: auto; font-size: 12.5px; letter-spacing: .04em;
+  color: #948fa1; white-space: nowrap; font-weight: 500;
+}
+.journey_desc { margin: 0; font-size: 15px; line-height: 24px; color: #c7c4cf; }
+.journey_desc strong { color: #e7e4ee; font-weight: 600; }
+
+@media screen and (max-width: 767px) {
+  .section_journey { margin-top: 64px; }
+  .journey_head { margin-bottom: 32px; }
+  .journey_item { padding-left: 32px; padding-bottom: 26px; }
+  .journey_meta { gap: 4px 8px; }
+  .journey_date { margin-left: 0; width: 100%; }
+  .journey_role, .journey_org { font-size: 18px; line-height: 24px; }
+  .journey_desc { font-size: 14.5px; line-height: 23px; }
+}
