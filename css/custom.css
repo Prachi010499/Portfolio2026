@@ -341,3 +341,17 @@
   .jcard_date { margin-left: 0; width: 100%; margin-top: 2px; }
   .jcard_role, .jcard_org { font-size: 18px; line-height: 23px; }
 }
+
+/* ---- About: intro paragraph after the video ----
+   Was full-width (1240px) with over-long lines + a forced <br/>. Constrain to a
+   comfortable reading column, centered, with even spacing above/below. */
+.div-block-13 {
+  max-width: 760px; margin: 0 auto 56px; padding: 0 20px;
+  height: auto;   /* Webflow fixed it to 150px (sized for 3 lines); let it grow */
+}
+.div-block-13 .paragraph-2 { max-width: 100%; width: 100%; }
+
+@media screen and (max-width: 767px) {
+  .div-block-13 { max-width: 100%; }
+  .paragraph-2 { font-size: 18px; line-height: 27px; }
+}
