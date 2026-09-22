@@ -95,54 +95,6 @@ window.REELS = [
     "cover": "../reel-covers/22_CBVP-DyA.jpg"
   },
   {
-    "url": "https://www.instagram.com/p/CAiKVGMAnIv/",
-    "cover": "../reel-covers/23_CAiKVGMA.jpg"
-  },
-  {
-    "url": "https://www.instagram.com/p/Bz8CKSwA290/",
-    "cover": "../reel-covers/24_Bz8CKSwA.jpg"
-  },
-  {
-    "url": "https://www.instagram.com/p/By7wMBCAry5/",
-    "cover": "../reel-covers/25_By7wMBCA.jpg"
-  },
-  {
-    "url": "https://www.instagram.com/p/By5ITGXAyJW/",
-    "cover": "../reel-covers/26_By5ITGXA.jpg"
-  },
-  {
-    "url": "https://www.instagram.com/p/By4cE4xgXFm/",
-    "cover": "../reel-covers/27_By4cE4xg.jpg"
-  },
-  {
-    "url": "https://www.instagram.com/p/BxSSPjlhfAY/",
-    "cover": "../reel-covers/28_BxSSPjlh.jpg"
-  },
-  {
-    "url": "https://www.instagram.com/p/BxSLWtBj5c-/",
-    "cover": "../reel-covers/29_BxSLWtBj.jpg"
-  },
-  {
-    "url": "https://www.instagram.com/p/Bw-O_mRBcGC/",
-    "cover": "../reel-covers/30_Bw-O_mRB.jpg"
-  },
-  {
-    "url": "https://www.instagram.com/p/Bw47secB8sM/",
-    "cover": "../reel-covers/31_Bw47secB.jpg"
-  },
-  {
-    "url": "https://www.instagram.com/p/BtwiNljhXRz/",
-    "cover": "../reel-covers/32_BtwiNljh.jpg"
-  },
-  {
-    "url": "https://www.instagram.com/p/BteKn-UggvU/",
-    "cover": "../reel-covers/33_BteKn-Ug.jpg"
-  },
-  {
-    "url": "https://www.instagram.com/p/BtWSwgmA3Gq/",
-    "cover": "../reel-covers/34_BtWSwgmA.jpg"
-  },
-  {
     "url": "https://www.instagram.com/reel/CXq7JBqFW1P/",
     "cover": "../reel-covers/35_CXq7JBqF.jpg"
   },

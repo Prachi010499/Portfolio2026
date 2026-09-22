@@ -17,6 +17,9 @@
 
   var FEED = "https://feeds.behold.so/Y7MqxcCQZZOXHip3Q96g";
   var TIMEOUT_MS = 5000;
+  // hide anything posted before this date (the snapshot in reels-data.js is
+  // already filtered to match; this guards the live feed too)
+  var CUTOFF = Date.parse("2020-06-01T00:00:00Z");
 
   // extract the /reel/<x>/ or /p/<x>/ shortcode so live + snapshot dedupe cleanly
   function shortcode(url) {
@@ -45,6 +48,7 @@
   function mapLive(posts) {
     var out = [];
     (posts || []).forEach(function (p) {
+      if (p.timestamp && Date.parse(p.timestamp) < CUTOFF) return;   // pre-June-2020
       var c = coverOf(p), u = p.permalink;
       if (c && u) out.push({ url: u, cover: c });
     });
